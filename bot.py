@@ -1,14 +1,8 @@
-from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
+from telegram.ext import Updater, MessageHandler, CommandHandler
+from telegram.ext.filters import Filters
 from telegram import ParseMode
 
-# Ganti TOKEN_BOT dengan token yang diberikan oleh BotFather
-TOKEN_BOT = '6551801424:AAEvoJmcTvxbEoVx6_RdfuokyUBrd7qUFS8'
-
-# Ganti CHAT_ID_OWNER dengan ID Telegram Anda
-CHAT_ID_OWNER = 6588255955
-
-def start(update, context):
-    update.message.reply_text("Bot is active!")
+# ...
 
 def anti_broadcast_handler(update, context):
     if update.message and update.message.chat_id == CHAT_ID_OWNER:
@@ -31,5 +25,4 @@ def main():
     updater.start_polling()
     updater.idle()
 
-if __name__ == '__main__':
-    main()
+# ...
