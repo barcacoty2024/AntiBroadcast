@@ -23,6 +23,6 @@ def main():
     dp.add_handler(MessageHandler(Filters.TEXT & ~Filters.FORWARD, anti_broadcast_handler))
 
     updater.start_polling()
-    updater.idle()
 
-# ...
+    # Bot akan tetap aktif sampai dihentikan secara manual
+    updater.idle()
