@@ -1,7 +1,7 @@
 # Bot Anti-Broadcast Telegram
 
 Bot ini dibuat menggunakan Python dengan bantuan pustaka python-telegram-bot. Bot ini dapat digunakan untuk menghapus pesan broadcast atau global di grup Telegram.
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)
+[![Deploy](https://img.shields.io/badge/Deploy_to-Heroku-7056bf.svg)](https://github.com/MaxGuns/AntiBroadcast)
 
 ## Persiapan
 
