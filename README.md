@@ -1,7 +1,12 @@
+## Deploy on Heroku
+<h3 align="center">Click The Button</h3>
+<a href="https://dashboard.heroku.com/new?template=https://github.com/MaxGuns/AntiBroadcast"><img src="https://www.herokucdn.com/deploy/button.svg"></a>
+</div>
+
+
 # Bot Anti-Broadcast Telegram
 
 Bot ini dibuat menggunakan Python dengan bantuan pustaka python-telegram-bot. Bot ini dapat digunakan untuk menghapus pesan broadcast atau global di grup Telegram.
-[![Deploy](https://img.shields.io/badge/Deploy_to-Heroku-7056bf.svg)](https://github.com/MaxGuns/AntiBroadcast)
 
 ## Persiapan
 
