@@ -22,7 +22,25 @@ def main():
     # Fungsi untuk menangani pesan global atau broadcast
     dp.add_handler(MessageHandler(Filters.TEXT & ~Filters.FORWARD, anti_broadcast_handler))
 
-    updater.start_polling()
+    # Disable unnecessary logging (optional)
+    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+    logging.getLogger('apscheduler.scheduler').setLevel(logging.ERROR)
+
+    # Non-interactive mode to avoid "Inappropriate ioctl for device" issue
+    context = None
+
+    def stop_and_restart():
+        updater.stop()
+        os.execl(sys.executable, sys.executable, *sys.argv)
+
+    def restart(update, context):
+        update.message.reply_text('Bot is restarting...')
+        Thread(target=stop_and_restart).start()
+
+    dp.add_handler(CommandHandler('restart', restart))
 
     # Bot akan tetap aktif sampai dihentikan secara manual
+    updater.start_polling()
+
+    # Bot akan tetap aktif, terus memperbarui tanpa memblokir
     updater.idle()
