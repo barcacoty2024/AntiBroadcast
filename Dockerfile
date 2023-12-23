@@ -1,4 +1,4 @@
-Sh neofetch --stdout# Use the official Python image
+# Use the official Python image
 FROM python:3.8-slim
 
 # Set working directory
@@ -14,8 +14,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Set environment variables
-ENV BOT_TOKEN=your_bot_token
-ENV CHAT_ID=your_chat_id
+ENV BOT_TOKEN=6551801424:AAEvoJmcTvxbEoVx6_RdfuokyUBrd7qUFS8
+ENV CHAT_ID=6588255955
 
 # Command to run on container start
 CMD ["python", "bot.py"]
