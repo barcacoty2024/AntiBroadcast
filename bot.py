@@ -2,10 +2,10 @@ from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
 from telegram import ParseMode
 
 # Ganti TOKEN_BOT dengan token yang diberikan oleh BotFather
-TOKEN_BOT = 'your_bot_token'
+TOKEN_BOT = '6551801424:AAEvoJmcTvxbEoVx6_RdfuokyUBrd7qUFS8'
 
 # Ganti CHAT_ID_OWNER dengan ID Telegram Anda
-CHAT_ID_OWNER = your_chat_id
+CHAT_ID_OWNER = 6588255955
 
 def start(update, context):
     update.message.reply_text("Bot is active!")
