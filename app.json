@@ -1,7 +1,7 @@
 {
   "name": "MyTelegramBot",
   "description": "Bot Anti-Broadcast Telegram",
-  "repository": "https://github.com/MaxGuns/AntiBroadcast",
+  "repository": "https://github.com/your-username/your-repository",
   "keywords": ["telegram", "bot", "heroku"],
   "scripts": {
     "start": "python bot.py"
@@ -16,18 +16,9 @@
       "required": true
     }
   },
-  "addons": [
-    {
-      "plan": "heroku/python",
-      "options": {
-        "version": "3.8.*"
-      }
-    }
-  ],
   "buildpacks": [
     {
       "url": "heroku/python"
     }
-  ],
-  "stack": "heroku-20"
+  ]
 }
