@@ -20,6 +20,7 @@ def main():
     # Port yang diberikan oleh Heroku
     port = int(os.environ.get('PORT', 5000))
 
+
     updater = Updater(token=TOKEN_BOT, use_context=True)
     dp = updater.dispatcher
 
