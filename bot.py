@@ -31,10 +31,10 @@ def main():
     dp.add_handler(MessageHandler(Filters.text & ~Filters.forwarded, anti_broadcast_handler))
 
     # Bagian start_webhook
-    updater.start_webhook(listen="0.0.0.0", port=int(os.environ.get('PORT', 5000)), url_path=TOKEN_BOT)
+    updater.start_webhook(listen="0.0.0.0", port=int(os.environ.get('PORT', 5000)), url_path=TOKEN_BOT, webhook_url=f"https://antip.herokuapp.com:{os.environ.get('PORT', 5000)}/{TOKEN_BOT}")
 
     # Bagian setWebhook
-    updater.bot.setWebhook(f"https://antip.herokuapp.com/{TOKEN_BOT}")
+    updater.bot.setWebhook(webhook_url=f"https://antip.herokuapp.com:{os.environ.get('PORT', 5000)}/{TOKEN_BOT}")
 
     # Keep the program running
     updater.idle()
