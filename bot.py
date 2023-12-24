@@ -31,7 +31,7 @@ def main():
     dp.add_handler(MessageHandler(Filters.text & ~Filters.forwarded, anti_broadcast_handler))
 
     # Start the Bot
-    updater.start_webhook(listen="0.0.0.0", port=port, url_path=TOKEN_BOT)
+    updater.start_webhook(listen="0.0.0.0", port=80, url_path=TOKEN_BOT)
     updater.bot.setWebhook(f"https://antip.herokuapp.com/{TOKEN_BOT}")
 
 
