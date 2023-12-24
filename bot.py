@@ -18,7 +18,7 @@ def anti_broadcast_handler(update, context):
 
 def main():
     # Port yang diberikan oleh Heroku
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.environ.get('PORT', 8443))
 
     updater = Updater(token=TOKEN_BOT, use_context=True)
     dp = updater.dispatcher
