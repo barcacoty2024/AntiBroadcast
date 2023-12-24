@@ -1,8 +1,12 @@
-from telegram.ext import Updater, MessageHandler, CommandHandler
-from telegram.ext.filters import Filters
+from telegram.ext import Updater, MessageHandler, CommandHandler, Filters
 from telegram import ParseMode
+import os
 
-# ...
+TOKEN_BOT = '6551801424:AAEvoJmcTvxbEoVx6_RdfuokyUBrd7qUFS8'
+CHAT_ID_OWNER = 6588255955
+
+def start(update, context):
+    update.message.reply_text("Bot is active!")
 
 def anti_broadcast_handler(update, context):
     if update.message and update.message.chat_id == CHAT_ID_OWNER:
@@ -22,27 +26,11 @@ def main():
     # Fungsi untuk menangani pesan global atau broadcast
     dp.add_handler(MessageHandler(Filters.TEXT & ~Filters.FORWARD, anti_broadcast_handler))
 
-    # Disable unnecessary logging (optional)
-    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
-    logging.getLogger('apscheduler.scheduler').setLevel(logging.ERROR)
-    # Set log level to DEBUG for detailed logging
-    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
-
-    # Non-interactive mode to avoid "Inappropriate ioctl for device" issue
-    context = None
-
-    def stop_and_restart():
-        updater.stop()
-        os.execl(sys.executable, sys.executable, *sys.argv)
-
-    def restart(update, context):
-        update.message.reply_text('Bot is restarting...')
-        Thread(target=stop_and_restart).start()
-
-    dp.add_handler(CommandHandler('restart', restart))
-
-    # Bot akan tetap aktif sampai dihentikan secara manual
+    # Start the Bot
     updater.start_polling()
 
-    # Bot akan tetap aktif, terus memperbarui tanpa memblokir
+    # Keep the program running
     updater.idle()
+
+if __name__ == '__main__':
+    main()
