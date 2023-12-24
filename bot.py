@@ -20,7 +20,6 @@ def main():
     # Port yang diberikan oleh Heroku
     port = int(os.environ.get('PORT', 5000))
 
-
     updater = Updater(token=TOKEN_BOT, use_context=True)
     dp = updater.dispatcher
 
@@ -30,15 +29,11 @@ def main():
     # Fungsi untuk menangani pesan global atau broadcast
     dp.add_handler(MessageHandler(Filters.text & ~Filters.forwarded, anti_broadcast_handler))
 
-    # Ganti ini
-    updater.bot.setWebhook(webhook_url=f"https://antip.herokuapp.com/{TOKEN_BOT}")
-
-    # Menjadi ini
-    updater.bot.setWebhook(f"https://antip.herokuapp.com/{TOKEN_BOT}")
+    # Mengatur webhook
+    updater.bot.setWebhook(url=f"https://antip.herokuapp.com/{TOKEN_BOT}")
 
     # Keep the program running
     updater.idle()
 
 if __name__ == '__main__':
     main()
-
