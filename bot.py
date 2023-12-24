@@ -31,7 +31,7 @@ def main():
 
     # Start the Bot
     updater.start_webhook(listen="0.0.0.0", port=port, url_path=TOKEN_BOT)
-    updater.bot.setWebhook(f"https://antip.herokuapp.com/{6551801424:AAEvoJmcTvxbEoVx6_RdfuokyUBrd7qUFS8}")
+    updater.bot.setWebhook(f"https://antip.herokuapp.com/{TOKEN_BOT}", port=443)
 
     # Keep the program running
     updater.idle()
