@@ -25,6 +25,8 @@ def main():
     # Disable unnecessary logging (optional)
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
     logging.getLogger('apscheduler.scheduler').setLevel(logging.ERROR)
+    # Set log level to DEBUG for detailed logging
+    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
 
     # Non-interactive mode to avoid "Inappropriate ioctl for device" issue
     context = None
