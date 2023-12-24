@@ -24,7 +24,7 @@ def main():
     dp.add_handler(CommandHandler("start", start))
 
     # Fungsi untuk menangani pesan global atau broadcast
-    dp.add_handler(MessageHandler(Filters.text & ~Filters.FORWARD, anti_broadcast_handler))
+    dp.add_handler(MessageHandler(Filters.text & ~Filters.forwarded, anti_broadcast_handler))
 
     # Start the Bot
     updater.start_polling()
