@@ -30,10 +30,11 @@ def main():
     # Fungsi untuk menangani pesan global atau broadcast
     dp.add_handler(MessageHandler(Filters.text & ~Filters.forwarded, anti_broadcast_handler))
 
-    # Start the Bot
+    # Bagian start_webhook
     updater.start_webhook(listen="0.0.0.0", port=int(os.environ.get('PORT', 5000)), url_path=TOKEN_BOT)
-    updater.bot.setWebhook(f"https://antip.herokuapp.com/{TOKEN_BOT}")
 
+    # Bagian setWebhook
+    updater.bot.setWebhook(f"https://antip.herokuapp.com/{TOKEN_BOT}")
 
     # Keep the program running
     updater.idle()
