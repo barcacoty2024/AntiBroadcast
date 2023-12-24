@@ -41,3 +41,4 @@ updater.bot.setWebhook(webhook_url=f"https://antip.herokuapp.com:{os.environ.get
 
 if __name__ == '__main__':
     main()
+
