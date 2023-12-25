@@ -2,7 +2,7 @@ import os
 import openai
 from telegram.ext import Updater, MessageHandler, Filters
 
-openai.api_key = 'YOUR_OPENAI_API_KEY'
+openai.api_key = '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'
 
 def respond_to_message(update, context):
     user_input = update.message.text
