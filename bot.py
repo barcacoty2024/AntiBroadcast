@@ -1,4 +1,3 @@
-import os
 import openai
 from telegram.ext import Updater, MessageHandler, Filters
 
@@ -15,16 +14,13 @@ def respond_to_message(update, context):
     update.message.reply_text(bot_response)
 
 def main():
-    port = int(os.environ.get('PORT', 5000))
     token = '6551801424:AAEvoJmcTvxbEoVx6_RdfuokyUBrd7qUFS8'
     updater = Updater(token, use_context=True)
     dp = updater.dispatcher
 
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, respond_to_message))
 
-    updater.start_webhook(listen="0.0.0.0", port=port, url_path=token)
-    updater.bot.setWebhook(f"https://your-heroku-app-name.herokuapp.com/{token}")
-
+    updater.start_polling()
     updater.idle()
 
 if __name__ == '__main__':
