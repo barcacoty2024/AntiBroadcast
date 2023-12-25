@@ -1,41 +1,30 @@
-from telegram.ext import Updater, MessageHandler, CommandHandler, Filters
-from telegram import ParseMode
 import os
+import openai
+from telegram.ext import Updater, MessageHandler, Filters
 
-TOKEN_BOT = '6551801424:AAEvoJmcTvxbEoVx6_RdfuokyUBrd7qUFS8'
-CHAT_ID_OWNER = 6588255955
+openai.api_key = 'YOUR_OPENAI_API_KEY'
 
-def start(update, context):
-    update.message.reply_text("Bot is active!")
-
-def anti_broadcast_handler(update, context):
-    if update.message and update.message.chat_id == CHAT_ID_OWNER:
-        # Pemilik bot dapat melihat pesan di grup
-        print(f"Owner Message: {update.message.text}")
-    elif update.message and update.message.chat_id != CHAT_ID_OWNER:
-        # Non-pemilik bot, blokir pesan global atau broadcast
-        update.message.delete()
+def respond_to_message(update, context):
+    user_input = update.message.text
+    response = openai.Completion.create(
+        engine="text-davinci-003",
+        prompt=user_input,
+        max_tokens=100
+    )
+    bot_response = response['choices'][0]['text']
+    update.message.reply_text(bot_response)
 
 def main():
-    # Port yang diberikan oleh Heroku
-    port = int(os.environ.get('PORT', 8443))
-
-    updater = Updater(token=TOKEN_BOT, use_context=True)
+    port = int(os.environ.get('PORT', 5000))
+    token = '6551801424:AAEvoJmcTvxbEoVx6_RdfuokyUBrd7qUFS8'
+    updater = Updater(token, use_context=True)
     dp = updater.dispatcher
 
-    # Command '/start' untuk memastikan bot aktif
-    dp.add_handler(CommandHandler("start", start))
+    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, respond_to_message))
 
-    # Fungsi untuk menangani pesan global atau broadcast
-    dp.add_handler(MessageHandler(Filters.text & ~Filters.forwarded, anti_broadcast_handler))
+    updater.start_webhook(listen="0.0.0.0", port=port, url_path=token)
+    updater.bot.setWebhook(f"https://your-heroku-app-name.herokuapp.com/{token}")
 
-    # Menghapus webhook yang lama (jika ada)
-    updater.bot.deleteWebhook()
-
-    # Start the Bot
-    updater.start_polling()
-
-    # Keep the program running
     updater.idle()
 
 if __name__ == '__main__':
