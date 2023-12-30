@@ -1,5 +1,5 @@
-from telegram import Update, ChatMemberUpdated
-from telegram.ext import Updater, MessageHandler, Filters, CallbackContext, ChatMemberHandler
+from telegram import Update, ChatMemberUpdated, Message
+from telegram.ext import Updater, MessageHandler, Filters, CallbackContext, ChatMemberHandler, CommandHandler
 
 # Dictionary untuk menyimpan data perubahan nama dan username
 changes_data = {}
@@ -14,6 +14,9 @@ def handle_chat_member_updated(update: Update, context: CallbackContext) -> None
     # Periksa apakah ada perubahan nama atau username
     if new_chat_member and old_chat_member and new_chat_member.username != old_chat_member.username:
         context.bot.send_message(update.message.chat_id, f"🔄 {new_chat_member.username} mengganti username menjadi {new_chat_member.username}!")
+
+        # Simpan riwayat perubahan nama
+        save_name_change(update.message.chat_id, new_chat_member.id, old_chat_member.full_name)
 
     if new_chat_member and old_chat_member and new_chat_member.full_name != old_chat_member.full_name:
         context.bot.send_message(update.message.chat_id, f"🔄 {new_chat_member.username} mengganti nama menjadi {new_chat_member.full_name}!")
@@ -30,7 +33,36 @@ def handle_messages(update: Update, context: CallbackContext) -> None:
             context.bot.send_message(chat_id, f"🔄 {user.username} mengganti nama menjadi {user.full_name}!")
 
         # Perbarui data perubahan nama dan username
-        changes_data[chat_id][user.id] = {'username': user.username, 'full_name': user.full_name}
+        save_name_change(chat_id, user.id, user.full_name)
+
+def list_previous_names(update: Update, context: CallbackContext) -> None:
+    chat_id = update.message.chat_id
+    replied_message = update.message.reply_to_message
+
+    if replied_message and replied_message.from_user:
+        user_id = replied_message.from_user.id
+        previous_names = get_previous_names(chat_id, user_id)
+
+        if previous_names:
+            message = f"Daftar nama sebelumnya untuk pengguna ini:\n{', '.join(previous_names)}"
+        else:
+            message = "Pengguna ini tidak memiliki daftar nama sebelumnya."
+    else:
+        message = "Balas pesan pengguna yang ingin Anda lihat daftar namanya."
+
+    context.bot.send_message(chat_id, message)
+
+def save_name_change(chat_id, user_id, new_full_name):
+    if chat_id not in changes_data:
+        changes_data[chat_id] = {}
+    if user_id not in changes_data[chat_id]:
+        changes_data[chat_id][user_id] = {'username': '', 'full_name': []}
+    changes_data[chat_id][user_id]['full_name'].append(new_full_name)
+
+def get_previous_names(chat_id, user_id):
+    if chat_id in changes_data and user_id in changes_data[chat_id]:
+        return changes_data[chat_id][user_id]['full_name']
+    return []
 
 def main() -> None:
     # Ganti TOKEN_BOT dengan token bot yang Anda dapatkan dari BotFather
@@ -46,6 +78,9 @@ def main() -> None:
 
     # Menangani pesan di grup
     dp.add_handler(MessageHandler(Filters.text & Filters.chat_type.groups, handle_messages))
+
+    # Menangani perintah /sa
+    dp.add_handler(CommandHandler('sa', list_previous_names))
 
     # Memulai bot
     updater.start_polling()
