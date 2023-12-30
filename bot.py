@@ -20,7 +20,7 @@ def handle_chat_member_updated(update: Update, context: CallbackContext) -> None
 
 def main() -> None:
     # Ganti TOKEN_BOT dengan token bot yang Anda dapatkan dari BotFather
-    updater = Updater("TOKEN_BOT")
+    updater = Updater("6551801424:AAEvoJmcTvxbEoVx6_RdfuokyUBrd7qUFS8")
 
     dp = updater.dispatcher
 
