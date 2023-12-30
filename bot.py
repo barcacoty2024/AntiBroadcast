@@ -36,6 +36,8 @@ def handle_messages(update: Update, context: CallbackContext) -> None:
         save_name_change(chat_id, user.id, user.full_name)
 
 def list_previous_names(update: Update, context: CallbackContext) -> None:
+    print("Command /sa triggered")  # Tambahkan ini sebagai pengecekan
+    # ... kode lainnya ...
     chat_id = update.message.chat_id
     replied_message = update.message.reply_to_message
 
