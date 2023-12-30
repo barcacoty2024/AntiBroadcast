@@ -1,4 +1,4 @@
-from telegram import Update, ChatMemberUpdated, Message
+from telegram import Update, ChatMemberUpdated
 from telegram.ext import Updater, MessageHandler, Filters, CallbackContext, ChatMemberHandler, CommandHandler
 
 # Dictionary untuk menyimpan data perubahan nama dan username
@@ -36,21 +36,14 @@ def handle_messages(update: Update, context: CallbackContext) -> None:
         save_name_change(chat_id, user.id, user.full_name)
 
 def list_previous_names(update: Update, context: CallbackContext) -> None:
-    print("Command /sa triggered")  # Tambahkan ini sebagai pengecekan
-    # ... kode lainnya ...
     chat_id = update.message.chat_id
-    replied_message = update.message.reply_to_message
+    user_id = update.message.from_user.id
+    previous_names = get_previous_names(chat_id, user_id)
 
-    if replied_message and replied_message.from_user:
-        user_id = replied_message.from_user.id
-        previous_names = get_previous_names(chat_id, user_id)
-
-        if previous_names:
-            message = f"Daftar nama sebelumnya untuk pengguna ini:\n{', '.join(previous_names)}"
-        else:
-            message = "Pengguna ini tidak memiliki daftar nama sebelumnya."
+    if previous_names:
+        message = f"Daftar nama sebelumnya untuk pengguna ini:\n{', '.join(previous_names)}"
     else:
-        message = "Balas pesan pengguna yang ingin Anda lihat daftar namanya."
+        message = "Pengguna ini tidak memiliki daftar nama sebelumnya."
 
     context.bot.send_message(chat_id, message)
 
@@ -65,6 +58,10 @@ def get_previous_names(chat_id, user_id):
     if chat_id in changes_data and user_id in changes_data[chat_id]:
         return changes_data[chat_id][user_id]['full_name']
     return []
+
+def simple_response(update: Update, context: CallbackContext) -> None:
+    chat_id = update.message.chat_id
+    context.bot.send_message(chat_id, "Ini adalah respons sederhana.")
 
 def main() -> None:
     # Ganti TOKEN_BOT dengan token bot yang Anda dapatkan dari BotFather
@@ -82,7 +79,10 @@ def main() -> None:
     dp.add_handler(MessageHandler(Filters.text & Filters.chat_type.groups, handle_messages))
 
     # Menangani perintah /sa
-    dp.add_handler(CommandHandler('sa', list_previous_names, pass_args=True))
+    dp.add_handler(CommandHandler('sa', list_previous_names))
+
+    # Menangani perintah /test
+    dp.add_handler(CommandHandler('test', simple_response))
 
     # Memulai bot
     updater.start_polling()
