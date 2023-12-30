@@ -1,38 +1,14 @@
 {
-    "name": "MaxGuns Userbot",
-    "description": "UserBot BIASA AJAH !!!.",
-    "repository": "https://github.com/MaxGuns/MaxGun",
-    "stack": "container",
-    "env": {  
-        "OWNER_ID": {
-            "description": "Fill there your I'd go to @geezramrobot pm and type /id",
-            "required": true,
-            "value": "6588255955"
-        },
-        "BOT_TOKEN": {
-            "description": "fill with your bot token get from @BotFather on telegram",
-            "required": true,
-            "value": "6551801424:AAEvoJmcTvxbEoVx6_RdfuokyUBrd7qUFS8"
-        },
-        "BOTLOG_CHATID": {
-            "description": "fill with your Publik LOG Group",
-            "required": false,
-            "value": "-1002044156039"
-        },
-        "HEROKU_API_KEY": {
-            "description": "Heroku Api Key",
-            "required": false,
-            "value": ""
-        },
-        "HEROKU_APP_NAME": {
-            "description": "Heroku APP name",
-            "required": false,
-            "value": ""
-        }
-    },
-        "buildpacks": [
-        {"url": "https://github.com/interconnectit/heroku-buildpack-ffmpeg"},
-        {"url": "https://github.com/subinps/heroku-buildpack-nodejs"},
-        {"url": "heroku/python"}
-    ]
+  "name": "nama-aplikasi-anda",
+  "description": "Deskripsi singkat tentang bot Anda",
+  "repository": "https://github.com/username/repo.git",
+  "logo": "link_ke_logo_anda.png",
+  "keywords": ["telegram", "bot"],
+  "env": {
+    "TOKEN_BOT": {
+      "description": "Token bot Telegram Anda",
+      "required": true
+    }
+  },
+  "addons": ["heroku-postgresql"]
 }
