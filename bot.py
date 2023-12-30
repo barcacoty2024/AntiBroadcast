@@ -71,7 +71,7 @@ def main() -> None:
     dp = updater.dispatcher
 
     # Menangani perintah /start
-    dp.add_handler(MessageHandler(Filters.command & Filters.regex('^start$'), start))
+    dp.add_handler(CommandHandler('start', start))
 
     # Menangani perubahan member chat (nama dan username)
     dp.add_handler(ChatMemberHandler(handle_chat_member_updated, ChatMemberUpdated))
@@ -80,7 +80,7 @@ def main() -> None:
     dp.add_handler(MessageHandler(Filters.text & Filters.chat_type.groups, handle_messages))
 
     # Menangani perintah /sa
-    dp.add_handler(CommandHandler('sa', list_previous_names))
+    dp.add_handler(CommandHandler('sa', list_previous_names, pass_args=True))
 
     # Memulai bot
     updater.start_polling()
