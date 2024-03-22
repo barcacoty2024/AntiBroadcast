@@ -65,7 +65,7 @@ def simple_response(update: Update, context: CallbackContext) -> None:
 
 def main() -> None:
     # Ganti TOKEN_BOT dengan token bot yang Anda dapatkan dari BotFather
-    updater = Updater("6551801424:AAEvoJmcTvxbEoVx6_RdfuokyUBrd7qUFS8")
+    updater = Updater("7134404818:AAED5iwrScJXVtehRa8QogJTZ2YXRqoK1e8")
 
     dp = updater.dispatcher
 
