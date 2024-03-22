@@ -1,6 +1,6 @@
 ## Deploy on Heroku
 <h3 align="center">Click The Button</h3>
-<a href="https://dashboard.heroku.com/new?template=https://github.com/MaxGuns/AntiBroadcast"><img src="https://www.herokucdn.com/deploy/button.svg"></a>
+<a href="https://dashboard.heroku.com/new?template=https://github.com/bebekk2024/AntiBroadcast"><img src="https://www.herokucdn.com/deploy/button.svg"></a>
 </div>
 
 
