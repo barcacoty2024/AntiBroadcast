@@ -1,7 +1,7 @@
 {
   "name": "nama-aplikasi-anda",
   "description": "Deskripsi singkat tentang bot Anda",
-  "repository": "https://github.com/username/repo.git",
+  "repository": "https://github.com/bebekk2024/repo.git",
   "logo": "link_ke_logo_anda.png",
   "keywords": ["telegram", "bot"],
   "env": {
