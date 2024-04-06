@@ -1,7 +1,7 @@
 {
-  "name": "nama-aplikasi-anda",
-  "description": "Deskripsi singkat tentang bot Anda",
-  "repository": "https://github.com/bebekk2024/repo.git",
+  "name": "Anti Gcast",
+  "description": "[Bot Anti Gcast] Buat hapus pesan btotd/gcast",
+  "repository": "https://github.com/bebekk2024/AntiBroadcast",
   "logo": "link_ke_logo_anda.png",
   "keywords": ["telegram", "bot"],
   "env": {
